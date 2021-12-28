@@ -1,0 +1,62 @@
+<main>
+    <div *ngIf="!this.createNewNote && !this.success" class="holder">
+        <div *ngIf="!this.note" class="note-content">
+            <h2 *ngIf="!this.note">Выберите заметку для просмотра.</h2>
+        </div>
+        <div *ngIf="this.note" class="note-content break">
+            <h2>{{note.title}}</h2>
+            {{note.text}}
+        </div>
+    </div>
+    <div *ngIf="this.createNewNote && !this.success">
+        <div class="note-content">
+            <h2>Новая заметка</h2>
+            <form (ngSubmit)="createNote()" [formGroup]="noteForm">
+                <div class="form-group">
+                    <div class="custom-input-fields">
+                      <label for="title">Заголовок</label>
+                      <input [maxLength]="255" class="form-control" formControlName="title" id="title" name="title"
+                             required type="text"/>
+                      <div *ngIf="submitted && noteForm.controls.title.errors" class="error">
+                        <small *ngIf="noteForm.controls.title.errors.required" class="text-warning">
+                          Заголовок является обязательным полем!
+                        </small>
+                        <small *ngIf="noteForm.controls.title.errors.maxlength" class="text-warning">
+                          Заголовок слишком длинный!
+                        </small>
+                        <small *ngIf="noteForm.controls.title.errors.pattern" class="text-warning">
+                          Заголовок некорректен!
+                        </small>
+                      </div>
+                    </div>
+              
+                    <div class="custom-input-fields">
+                        <label for="text">Текст</label>
+                        <textarea cols="30" formControlName="text" id="text" name="text" placeholder="Напишите текст здесь "
+                                  rows="10"></textarea>
+                        <div *ngIf="submitted && noteForm.controls.text.errors" class="error">
+                          <small *ngIf="noteForm.controls.text.errors.required" class="text-warning">
+                            Текст является необходимым полем!
+                          </small>
+                          <small *ngIf="noteForm.controls.text.errors.maxlength" class="text-warning">
+                            Текст слишком длинный!
+                          </small>
+                          <small *ngIf="noteForm.controls.text.errors.pattern" class="text-warning">
+                            Текст некорректен!
+                          </small>
+                        </div>
+                    </div>
+
+                    <button class="save" type="submit">Сохранить</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="this.success">
+        <div class="note-content">
+            <h2>Вы создали новую заметку под заголовком "{{this.createdNoteTitle}}"!</h2>
+            <button class="save max" (click)="resetNote()">Продолжить</button>
+        </div>
+    </div>
+</main>

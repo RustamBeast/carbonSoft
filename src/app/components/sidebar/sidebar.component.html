@@ -1,0 +1,6 @@
+<nav>
+    <ul>
+        <li *ngFor="let note of notes"><button id="note{{note.id}}" type='submit' (click)="choose(note)">{{note.title}}</button></li>
+        <li><button id="addNote" type='submit' (click)="addNote(true)">Добавить заметку</button></li>
+    </ul>
+</nav>

@@ -1,0 +1,4 @@
+<div class="wrapper">
+    <app-sidebar [notes]="this.notes" (chosenNote)="chosenNoteHandler($event)" (createNote)="createNoteHandler($event)"></app-sidebar>
+    <app-content [globalAmount]="this.notes.length" [note]="this.chosenNote" [createNewNote]="this.createNote" (createdNote)="createdNoteHandler($event)"></app-content>
+</div>
